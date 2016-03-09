@@ -39,7 +39,16 @@ window.addEventListener('load', function() {
 	};
 	
 	var stop = function(event) {
+		event.preventDefault();
+		
 		ustavi = true;
+		
+		//	Restore text, id and event listeners.
+		var stopButton = document.getElementById("stopButton");
+		stopButton.innerHTML = "Zaženi stroboskop";
+		stopButton.removeEventListener("click", stop);
+		stopButton.addEventListener("click", zagon);
+		stopButton.setAttribute("id", "start");
 	};
 	
 	var zagon = function(event) {
@@ -58,6 +67,8 @@ window.addEventListener('load', function() {
 		start.innerHTML = "Ustavi stroboskop";
 		start.removeEventListener('click', zagon);
 		start.addEventListener('click', stop);
+		//	Set new id value.
+		start.setAttribute("id", "stopButton");
 	};
 	
 	document.querySelector("#start").addEventListener('click', zagon);
